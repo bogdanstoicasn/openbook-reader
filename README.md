@@ -229,8 +229,6 @@ Connection to the ESP32-C6 and other modules:
 
 - Function: User input for navigation and control
 
-- Power consumption: ~10mA during press, ~0.1uA in standby mode
-
 Connection to the ESP32-C6 and other modules:
 
 > EN -> RESET
@@ -291,13 +289,15 @@ Total Current Draw: 89.8 mA
 
 - Power traces width: 0.3mm
 
+- Power traces were routed without vias to ensure low impedance and reliable power delivery.
+
 - Signal traces width: 0.15mm
 
 - No routing under ESP antenna
 
 - 2 layers PCB with 2 ground planes
 
-- All components TOP Layer
+- All components on TOP Layer
 
 ## Testing and Debugging
 
