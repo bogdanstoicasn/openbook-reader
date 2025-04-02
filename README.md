@@ -1,4 +1,259 @@
-# openbook-reader
+# OpenBook-reader
+
+## Overview
+
+OpenBook is an open-source e-book reader designed to be affordable and customizable. It is built around the ESP32-C6 microcontroller and integrates an E-Ink display, a Li-Po battery, and a microSD slot for extended storage. The device targets a wide range of users, from hobbyists to developers, who want to create their own e-book reader or modify existing designs.
+
+## Table of Contents
+
+1. [Features](#features)
+
+2. [Data](#data)
+
+3. [Block Diagram](#block-diagram)
+
+4. [Hardware Functionality](#hardware-functionality)
+
+5. [Hardware Components & Datasheets](#hardware-components--datasheets)
+
+6. [Additional Design Considerations](#additional-design-considerations)
+
+7. [Testing and Debugging](#testing-and-debugging)
+
+8. [Suggestions](#suggestions)
+
+
+## Features
+
+- **Microcontroller**: ESP32-C6 with Wi-Fi and Bluetooth capabilities
+
+- **Display**: 7.5" E-Ink display with a resolution of  800x480 pixels
+
+- **Storage**: MicroSD card slot for additional storage
+
+- **Battery**: Rechargeable Li-Po battery with a capacity of 2500mAh
+
+- **Connectivity**: Wi-Fi 6, Bluetooth 5.0, and USB-C for charging and data transfer
+
+- **Sensors**: Integrated environmental sensor (BME680) for temperature, humidity, pressure, and gas measurements
+
+- **Real-Time Clock**: DS3231 for accurate timekeeping
+
+- **User Interface**: 3 tactile buttons for navigation and control
+
+## Data
+
+Dimension: 175mm x 114mm x 10mm
+
+Weight: 250g
+Supported file formats: EPUB, PDF, TXT, FB2.
+
+Operating system: FreeRTOS
+
+Charging: 5V/1A via USB-C
+
+## Block Diagram
+
+**TODO**: Add a block diagram to illustrate the connections between the components.
+
+## Hardware Functionality
+
+### Microcontroller:
+
+The ESP32-C6 is the main processing unit, responsible for handling all system operations, including e-paper display updates, wireless communication, and power management. It features:
+
+- RISC-V architecture 32-bit core
+
+- 2.4 GHz Wi-Fi and Bluetooth 5.0 connectivity
+
+-  160 MHz clock speed with 4 stage pipeline
+
+- L1 chache 16KB
+
+- ROM 320KB
+
+- SRAM 512KB(HP) + 16KB (LP)
+
+- 30 GPIO pins
+
+Power consumption: 160uA in deep sleep mode, 10mA in active mode
+
+### Display:
+
+- Type: E-Ink (E-Paper) display
+
+- Size: 7.5 inches
+
+- Resolution:  800x480 pixels
+
+- Communication: SPI interface
+
+- Power consumption: ~1.2mW in active mode, ~0.1mW in standby mode
+
+Connection to the ESP32-C6 and other modules:
+
+> IO7 -> MOSI(14)
+
+> IO6 -> SCK(13)
+
+> IO10 -> EPD_CS(12)
+
+> IO5 -> EPD_DC(11)
+
+> IO23 -> EPD_RST(10)
+
+> IO3 -> EPD_BUSY(9)
+
+Connection to power:
+
+> EPD_3V3 -> 3.3V
+
+### MicroSD Card
+
+- Type: MicroSD card
+
+- Capacity: Up to 32GB (FAT32 format)
+
+- Communication: SPI interface
+
+- Power consumption: ~50mA during read/write operations, ~10uA in standby mode
+
+Connection to the ESP32-C6 and other modules:
+
+> IO7 -> MOSI(CMD)
+
+> IO6 -> SCK(CLK)
+
+> IO4 -> SS_SD(CD/DAT3)
+
+> IO2 -> MISO(DAT0)
+
+### Battery and Power Management
+
+- Type: Li-Po battery
+
+- Capacity: 2500mAh
+
+- Voltage: 3.7V nominal, 4.2V max
+
+- Voltage regulator: MCP73831T for charging and power management
+
+- Charging: 5V/1A via USB-C
+
+- Power consumption: ~10mA during active mode, less than 50uA in deep sleep mode
+
+Connection to the ESP32-C6 and other modules:
+
+> CELL -> BAT
+
+> IO21 -> SDA(SDA)
+
+> IO22 -> SCL(SCL)
+
+### Environmental Sensor
+
+- Type: BME680
+
+- Measurement: Temperature, humidity, pressure, and gas
+
+- Communication: I2C interface
+- Power consumption: ~3.6mA during measurement, ~0.1uA in sleep mode
+
+Connection to the ESP32-C6 and other modules:
+
+> IO21 -> SDA(SDI)
+
+> IO22 -> SCL(SCK)
+
+> IO19 -> I2C_PW(VDDIO)
+
+### Real-Time Clock
+
+- Type: DS3231
+
+- Function: Accurate timekeeping
+
+- Communication: I2C interface
+
+- Power consumption: ~1.5uA in battery backup mode, ~0.1uA in sleep mode
+
+Connection to the ESP32-C6 and other modules:
+
+> IO21 -> SDA(15)
+
+> IO22 -> SCL(16)
+
+> IO18 -> RTC_RST(RST)
+
+> IO1 -> 32KHz(32KHz)
+
+> IO0 -> INT_RTC(SQW/INT)
+
+### External Nor Flash
+
+- Type: SPI Flash
+
+- Capacity: 64MB
+
+- Communication: SPI interface
+
+- Power consumption: ~10mA during read/write operations, ~0.1uA in standby mode
+
+Connection to the ESP32-C6 and other modules:
+
+> IO11 -> EPD_CS(CS)
+
+> IO6 -> SCK(CLK)
+
+> IO2 -> MISO(DO/IO1)
+
+> IO7 -> MOSI(DI/IO0)
+
+### USB-C Connector
+
+- Type: USB-C connector
+
+- Function: Charging and data transfer
+
+- Power consumption: ~5V/1A during charging, ~0.1uA in standby mode
+
+- Protection: PFMF varistor for ESD protection
+
+- Diode: Schottky barrier rectifier diode for reverse polarity protection
+
+### Buttons
+
+- Type: Tactile push buttons
+
+- Number: 3
+
+- Function: User input for navigation and control
+
+- Power consumption: ~10mA during press, ~0.1uA in standby mode
+
+Connection to the ESP32-C6 and other modules:
+
+> EN -> RESET
+
+> IO9 -> IO/BOOT
+
+> IO15 -> IO/CHANGE
+
+### Calculations
+
+| Component | Current Draw (mA) | Voltage (V) | Power (mW) |
+|-----------|-------------------|-------------|------------|
+| ESP32-C6  | 10 | 3.3         | 33         |
+| E-Ink Display | 1.2 | 3.3         | 3.96       |
+| MicroSD Card | 50 | 3.3         | 165        |
+| BME680 | 3.6 | 3.3         | 11.88      |
+| DS3231 | 0.015 | 3.3         | 0.0495     |
+| MCP73831T | 10 | 3.3         | 33         |
+| USB-C Connector | 5 | 5         | 25         |
+| External Flash | 10 | 3.3         | 33         |
+
+Total Power Consumption: 304.3 mW
+Total Current Draw: 89.8 mA
 
 ## Hardware Components & Datasheets
 
@@ -30,17 +285,59 @@
 | Solder Jumper | We can use 0 ohms resistor | 1 | https://industrial.panasonic.com/ww/products/pt/general-purpose-chip-resistors/models/ERJ2GE0R00X | https://www.digikey.com/en/products/detail/panasonic-electronic-components/ERJ-2GE0R00X/146727 |
 | Test Pad | Testing points for the PCB (Adafruit). | 17 | https://analytics.supplyframe.com/trackingservlet/track/?r=0x34EY99PS_gIu2qWuzU9_U842M9-un2szqNoXX0OQ9lqbiEKGN3BJ73jgvlrgiXR89Peb0evqc4GXoUXllBhu1MMSvPYuTjdNvrqssrdYelKlOnXRLLdDb62WVGcgff9ScDqkaNl77wLfnOOEQKj2STWkPX13L-FNZ3oWIMFUHCC5-qDG-7Yig6Avs38Cl7gJvFvhhIZBQgwOTPSvwankeiqCZiPIu4pf1a70cDpS5iXBHs4MnmfZND2GG-sF6aJg5UUnsB5VhTJSE6wk45p-6HRTMw22O4bszSnP2Q-ZnkBbKsUJKjNCqwjgBsJDq1_QscdqTO6PxRf527DX_uye2RbWidMqOlR-Vbcwp2OFH8GWfRIZFBGLsZvpqmkT4i-YX6Nptn2BWY2qtOQUnzCPdCvB7YMhgJaZgpVomGW3xiBrXHrx7fYI1m3zFYuPc18lUM4dLxlLjbOFrCL0NYDVpEveG92dFwHfnYbXQgvjrXr2rAOwFVNwEcAFSYk5ktrRa9hExtgpErVY2QODMhmvQzib95lr7oG9joYEr_b8joW8nw_gi1w2cyDxUshEAF | https://componentsearchengine.com/prices/3825?manufacturer=Adafruit |
 
+## Additional Design Considerations
 
+- Decoupling capacitors(100nF) should be placed close to the power pins of major components
 
+- Power traces width: 0.3mm
 
+- Signal traces width: 0.15mm
 
+- No routing under ESP antenna
 
+- 2 layers PCB with 2 ground planes
 
+- All components TOP Layer
 
+## Testing and Debugging
 
+The OpenBook PCB has test pads for each major communication and power line.
 
+1. TPRX - RX signal
+2. TPTX - TX signal
+3. TPVBAT - Battery voltage
+4. 2 x TPGND - Ground
+5. TP3V3 - 3.3V power
+6. TPEPD_3V3 - EPD 3.3V power
+7. TPMISO - MISO signal
+8. TPMOSI - MOSI signal
+9. TPSCK - SCK signal
+10. TPEPDBUSY - EPD BUSY signal
+11. TPEPDCS - EPD CS signal
+12. TPEPDDC - EPD DC signal
+13. TPEPDRST - EPD RST signal
+14. TPEPD3V3C - EPD 3.3V power
+15. TPVBUS - VBUS voltage
+16. TPINTRTC - RTC interrupt signal
 
+## Suggestions
 
+- Operating system: FreeRTOS
 
+- Programming language: C/C++
+
+- IDE: PlatformIO or Arduino IDE
+
+- Libraries: ESP-IDF, EPD library, SD card library, BME680 library, DS3231 library
+
+- Communication protocols: SPI, I2C, UART
+
+- Power management: Use deep sleep mode to save power when not in use
+
+- User interface: Use a simple menu system for navigation and control
+
+- File management: Implement a file system for easy access to e-books on the microSD card
+
+- E-book reader software: Use an existing open-source e-book reader software or develop a custom solution
 
 
