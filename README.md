@@ -54,7 +54,7 @@ Charging: 5V/1A via USB-C
 
 ## Block Diagram
 
-**TODO**: Add a block diagram to illustrate the connections between the components.
+![Block Diagram](openbook-diagram.png)
 
 ## Hardware Functionality
 
