@@ -310,7 +310,9 @@ Total Current Draw: 89.8 mA
 
 - All PCB traces are routed to avoid 90-degree angles to ensure signal integrity and reduce the risk of electromagnetic interference (EMI).
 
-- The 3D connection model for the display has been designed to provide a realistic representation of the **Display**; however, the connection model it's not flexible(used just for accurate display representation)
+- The 3D connection model for the display has been designed to provide a realistic representation of the **Display**; however, the connection model it's not flexible(used just for accurate display representation).
+
+- The models for the battery and display are included to mimic their real-world sizes for visualization purposes. They do not reflect the actual hardware functionality or internal components.
 
 ## 3D Visualizations
 
