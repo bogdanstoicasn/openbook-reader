@@ -16,7 +16,7 @@ OpenBook is an open-source e-book reader designed to be affordable and customiza
 
 5. [Hardware Components & Datasheets](#hardware-components--datasheets)
 
-6. [Design Decisions & Trade-offs](#design-decisions-&-trade-offs)
+6. [Design Decisions and Trade-offs](#design-decisions-and-trade-offs)
 
 7. [3D Visualizations](#3d-visualizations)
    
@@ -285,7 +285,7 @@ Total Current Draw: 89.8 mA
 | Solder Jumper | We can use 0 ohms resistor | 1 | https://industrial.panasonic.com/ww/products/pt/general-purpose-chip-resistors/models/ERJ2GE0R00X | https://www.digikey.com/en/products/detail/panasonic-electronic-components/ERJ-2GE0R00X/146727 |
 | Test Pad | Testing points for the PCB (Adafruit). | 17 | https://analytics.supplyframe.com/trackingservlet/track/?r=0x34EY99PS_gIu2qWuzU9_U842M9-un2szqNoXX0OQ9lqbiEKGN3BJ73jgvlrgiXR89Peb0evqc4GXoUXllBhu1MMSvPYuTjdNvrqssrdYelKlOnXRLLdDb62WVGcgff9ScDqkaNl77wLfnOOEQKj2STWkPX13L-FNZ3oWIMFUHCC5-qDG-7Yig6Avs38Cl7gJvFvhhIZBQgwOTPSvwankeiqCZiPIu4pf1a70cDpS5iXBHs4MnmfZND2GG-sF6aJg5UUnsB5VhTJSE6wk45p-6HRTMw22O4bszSnP2Q-ZnkBbKsUJKjNCqwjgBsJDq1_QscdqTO6PxRf527DX_uye2RbWidMqOlR-Vbcwp2OFH8GWfRIZFBGLsZvpqmkT4i-YX6Nptn2BWY2qtOQUnzCPdCvB7YMhgJaZgpVomGW3xiBrXHrx7fYI1m3zFYuPc18lUM4dLxlLjbOFrCL0NYDVpEveG92dFwHfnYbXQgvjrXr2rAOwFVNwEcAFSYk5ktrRa9hExtgpErVY2QODMhmvQzib95lr7oG9joYEr_b8joW8nw_gi1w2cyDxUshEAF | https://componentsearchengine.com/prices/3825?manufacturer=Adafruit |
 
-## Design Decisions & Trade-offs
+## Design Decisions and Trade-offs
 
 - Decoupling capacitors(100nF) should be placed close to the power pins of major components
 
@@ -309,7 +309,7 @@ Total Current Draw: 89.8 mA
 
 ### Battery
 
-![Block Diagram](Images/Battery.PNG.png)
+![Block Diagram](Images/Battery.png)
 
 ### Display
 
