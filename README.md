@@ -332,7 +332,7 @@ Total Current Draw: 89.8 mA
 
 ![Block Diagram](Images/FrontModel.PNG)
 
-![Block Diagram](Images/BackModel.PNG)
+![Block Diagram](Images/BackModel.png)
 
 ## Testing and Debugging
 
