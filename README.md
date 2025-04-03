@@ -159,6 +159,7 @@ Connection to the ESP32-C6 and other modules:
 - Measurement: Temperature, humidity, pressure, and gas
 
 - Communication: I2C interface
+
 - Power consumption: ~3.6mA during measurement, ~0.1uA in sleep mode
 
 Connection to the ESP32-C6 and other modules:
@@ -287,7 +288,7 @@ Total Current Draw: 89.8 mA
 
 ## Design Decisions and Trade-offs
 
-- Decoupling capacitors(100nF) should be placed close to the power pins of major components
+- Decoupling capacitors(100nF) should be placed close to the power pins of major components.
 
 - Power traces width: 0.3mm
 
@@ -295,11 +296,21 @@ Total Current Draw: 89.8 mA
 
 - Signal traces width: 0.15mm
 
-- No routing under ESP antenna
+- No routing under ESP antenna.
 
-- 2 layers PCB with 2 ground planes
+- 2 layers PCB with 2 ground planes.
 
-- All components on TOP Layer
+- All components on TOP Layer.
+
+- Test pads were placed close to the relevant signals to facilitate easier probing and debugging.
+
+- PCB cut near ESP32-C6 antenna for better signal, with a keep-out zone to reduce interference.
+
+- The PCB layout follows the reference design shown in Images/layout_reference.pdf.
+
+- All PCB traces are routed to avoid 90-degree angles to ensure signal integrity and reduce the risk of electromagnetic interference (EMI).
+
+- The 3D connection model for the display has been designed to provide a realistic representation of the **Display**; however, the connection model it's not flexible(used just for accurate display representation)
 
 ## 3D Visualizations
 
@@ -309,7 +320,7 @@ Total Current Draw: 89.8 mA
 
 ### Battery
 
-![Block Diagram](Images/Battery.png)
+![Block Diagram](Images/Battery.PNG)
 
 ### Display
 
