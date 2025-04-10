@@ -16,13 +16,15 @@ OpenBook is an open-source e-book reader designed to be affordable and customiza
 
 5. [Hardware Components & Datasheets](#hardware-components--datasheets)
 
-6. [Design Decisions and Trade-offs](#design-decisions-and-trade-offs)
+6. [Implementation](#implementation)
 
-7. [3D Visualizations](#3d-visualizations)
+7. [Design Decisions and Trade-offs](#design-decisions-and-trade-offs)
+
+8. [3D Visualizations](#3d-visualizations)
    
-8. [Testing and Debugging](#testing-and-debugging)
+9. [Testing and Debugging](#testing-and-debugging)
 
-9. [Suggestions](#suggestions)
+10. [Suggestions](#suggestions)
 
 
 ## Features
@@ -286,6 +288,38 @@ Total Current Draw: 89.8 mA
 | Solder Jumper | We can use 0 ohms resistor | 1 | https://industrial.panasonic.com/ww/products/pt/general-purpose-chip-resistors/models/ERJ2GE0R00X | https://www.digikey.com/en/products/detail/panasonic-electronic-components/ERJ-2GE0R00X/146727 |
 | Test Pad | Testing points for the PCB (Adafruit). | 17 | https://analytics.supplyframe.com/trackingservlet/track/?r=0x34EY99PS_gIu2qWuzU9_U842M9-un2szqNoXX0OQ9lqbiEKGN3BJ73jgvlrgiXR89Peb0evqc4GXoUXllBhu1MMSvPYuTjdNvrqssrdYelKlOnXRLLdDb62WVGcgff9ScDqkaNl77wLfnOOEQKj2STWkPX13L-FNZ3oWIMFUHCC5-qDG-7Yig6Avs38Cl7gJvFvhhIZBQgwOTPSvwankeiqCZiPIu4pf1a70cDpS5iXBHs4MnmfZND2GG-sF6aJg5UUnsB5VhTJSE6wk45p-6HRTMw22O4bszSnP2Q-ZnkBbKsUJKjNCqwjgBsJDq1_QscdqTO6PxRf527DX_uye2RbWidMqOlR-Vbcwp2OFH8GWfRIZFBGLsZvpqmkT4i-YX6Nptn2BWY2qtOQUnzCPdCvB7YMhgJaZgpVomGW3xiBrXHrx7fYI1m3zFYuPc18lUM4dLxlLjbOFrCL0NYDVpEveG92dFwHfnYbXQgvjrXr2rAOwFVNwEcAFSYk5ktrRa9hExtgpErVY2QODMhmvQzib95lr7oG9joYEr_b8joW8nw_gi1w2cyDxUshEAF | https://componentsearchengine.com/prices/3825?manufacturer=Adafruit |
 
+## Implementation
+
+### Initial Setup and Tool Selection
+
+- Choose your PCB design software(Fusion360)
+
+- Prepare the mechanical dimensions and casing files provided
+
+### Create the Schematic
+
+- Add the ESP32-C6 microcontroller, power components, display interfaces, buttons, and other required components
+
+- Ensure the pin configuration for the ESP32-C6 matches the required hardware interfaces (e.g., SPI for the display, I2C for sensors).
+
+- Implement decoupling capacitors near the power pins
+
+- Electrical Design Validation (EVT)
+
+### PCB Layout Design
+
+- Place major components like the ESP32, display, and battery connectors according to the provided layout recommendations
+
+- Route the traces carefully, avoiding sharp angles and placing vias in non-critical signal paths
+
+- Design Rule Check(DRC)
+
+### Mechanical Design Integration
+
+- Create 3D models for case, battery and display for integration
+
+- Verify that all components fit within the casing and that connectors like USB and SD card slots align with physical cutouts
+
 ## Design Decisions and Trade-offs
 
 - Decoupling capacitors(100nF) should be placed close to the power pins of major components.
@@ -306,6 +340,10 @@ Total Current Draw: 89.8 mA
 
 - PCB cut near ESP32-C6 antenna for better signal, with a keep-out zone to reduce interference.
 
+- The ESP32-C6 features multiple low-power modes (including deep sleep and light sleep) and efficient power domain management.
+
+- Via stitching under the ESP32-C6 is beneficial for improving thermal dissipation and electromagnetic interference (EMI) performance.
+
 - The PCB layout follows the reference design shown in Images/layout_reference.pdf.
 
 - All PCB traces are routed to avoid 90-degree angles to ensure signal integrity and reduce the risk of electromagnetic interference (EMI).
@@ -313,6 +351,8 @@ Total Current Draw: 89.8 mA
 - The 3D connection model for the display has been designed to provide a realistic representation of the **Display**; however, the connection model it's not flexible(used just for accurate display representation).
 
 - The models for the battery and display are included to mimic their real-world sizes for visualization purposes. They do not reflect the actual hardware functionality or internal components.
+
+- Integrating ESD protection helps safeguard sensitive components—like the ESP32-C6 and display driver—from electrostatic discharge events
 
 ## 3D Visualizations
 
